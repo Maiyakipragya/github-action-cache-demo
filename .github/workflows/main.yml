@@ -1,1 +1,33 @@
+name: Cache Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout the repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Create folder with dummy content to cache
+      - name: Prepare cache folder
+        run: |
+          mkdir -p .cache
+          echo "This is dummy cached content" > .cache/dummy.txt
+
+      # 3️⃣ Prime the cache
+      - name: Prime cache cache-c5db27f
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: cache-c5db27f
+
+      # 4️⃣ Echo cache hit/miss
+      - name: prime-cache-c5db27f
+        run: echo "Cache hit status: ${{ steps.cache.outputs.cache-hit }}"
 
