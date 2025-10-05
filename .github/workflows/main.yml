@@ -1,0 +1,25 @@
+name: Cache Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Prime cache
+      - name: Prime cache cache-c5db27f
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: ~/.cache
+          key: cache-c5db27f
+
+      # Echo cache result
+      - name: Prime-cache-c5db27f
+        run: echo "Cache hit status: ${{ steps.cache.outputs.cache-hit }}"
