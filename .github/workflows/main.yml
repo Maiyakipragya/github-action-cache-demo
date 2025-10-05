@@ -12,14 +12,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Prime cache
+      # Cache dependencies
       - name: Prime cache cache-c5db27f
-        uses: actions/cache@v4
         id: cache
+        uses: actions/cache@v4
         with:
-          path: ~/.cache
+          path: ~/.cache  # This can be any folder you want to cache
           key: cache-c5db27f
 
-      # Echo cache result
+      # Echo cache hit/miss
       - name: Prime-cache-c5db27f
         run: echo "Cache hit status: ${{ steps.cache.outputs.cache-hit }}"
